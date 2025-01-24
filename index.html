@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Chris</title>
+
+    <style>
+
+        h1 {
+            color: red;
+            width: 100px;
+            background-color: rgb(0, 255, 51);
+        }
+
+
+        img {
+            border: solid;
+            box-shadow: 10px 10px 10px;
+        }
+
+        li {
+            background-color: aqua;
+            border: darkolivegreen;
+        }
+        
+        #blokka {
+            width: 100px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chris</h1>
+    
+    <div id="blokka">
+        <h3>Hobbyer</h3>
+        
+        <div>
+            <ul>
+                <li>Koding</li>
+                <li>Hund</li>
+                <li>Tur</li>
+                <li>Trening</li>
+                <li>Fjas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <button id="klipp" onclick="cuttingsForanNothinBak()">Trykk for å klippe hunden min</button>
+        <button id="klipp" onclick="reverser()">Reverser</button>
+        <br>
+        <div id="bildet" >
+            <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
+        </div>
+    </div>
+
+
+
+<script>
+     
+
+    function cuttingsForanNothinBak() {
+        document.getElementById('bildet').innerHTML = /*HTML*/ `
+        <img src="PXL_20250119_150226897.jpg" style="height: 500px;">
+        `;
+    }
+    function reverser() {
+        document.getElementById('bildet').innerHTML = /*HTML*/ `
+        <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
+        `;
+    }
+
+</script>
+</body>
+</html>
