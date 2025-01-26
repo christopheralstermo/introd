@@ -7,6 +7,13 @@
 
     <style>
 
+        #pålinje{
+            display: flex;
+        }
+        #bilde2{
+        margin-left: 50px;
+        }
+
         h1 {
             color: red;
             width: 100px;
@@ -19,7 +26,7 @@
             box-shadow: 10px 10px 10px;
         }
 
-        li {
+        /* li {
             background-color: aqua;
             border: darkolivegreen;
         }
@@ -27,13 +34,86 @@
         #blokka {
             width: 100px;
             background-color: aquamarine;
-        }
+        } */
     </style>
 </head>
 <body>
-    <h1>Chris</h1>
+    <h1 style="background-color: rgb(farger(), 59, 59);">Chris</h1>
+
+        <button onclick="up()">Større skrift</button>
+        <div id="output">0px</div>
+        
+
     
-    <div id="blokka">
+<div id="blokka"></div>
+
+    <div id="pålinje">
+        <div>
+            <button id="klipp" onclick="cuttingsForanAndNothinBak()">Trykk for å klippe hunden</button>
+            <button id="klipp" onclick="reverser()">Reverser</button>
+            <br>
+            <div id="bildet" >
+                <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
+            </div>
+        </div>
+        <div id="bilde2">
+            <button id="klipp" onclick="theSmile()">Trenger du et smil?</button>
+            <br>
+            <div id="giffen" >
+                <img src="1.png" style="height: 500px;">
+            </div>
+        </div>
+    </div>
+
+    <p id="toggled">
+        true
+    </p>
+    <button onclick="testToggle()">test</button>
+
+<script>
+    var tekstTaill = 25
+    var fargTaill = 0
+    let testBool = true
+    
+    function testToggle() {
+            testBool = !testBool;
+            document.getElementById('toggled').innerHTML = testBool
+        }
+    
+     function theSmile() {
+
+             document.getElementById('giffen').innerHTML = /*HTML*/ `
+             <img src="repeat.gif" style="height: 500px;">
+             `;
+
+     }
+
+    function cuttingsForanAndNothinBak() {
+        document.getElementById('bildet').innerHTML = /*HTML*/ `
+        <img src="PXL_20250119_150226897.jpg" style="height: 500px;">
+        `;
+    }
+
+    function reverser() {
+        document.getElementById('bildet').innerHTML = /*HTML*/ `
+        <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
+        `;
+    }
+    
+    function backGround(bredde, size) {
+        let blokka = document.getElementById('blokka')
+        blokka.style.width = bredde
+        blokka.style.fontSize = size
+    }
+    
+    function up() {
+        tekstTaill += 1;
+        var tall = String(tekstTaill);
+        var tekst = "px";
+        var nyGreie = tall.concat("",tekst);
+        document.getElementById('output').innerHTML = tall + 'px';
+        document.getElementById('blokka').innerHTML = /*HTML*/ `
+        <button onclick="down()">Mindre skrift</button>
         <h3>Hobbyer</h3>
         
         <div>
@@ -44,31 +124,104 @@
                 <li>Trening</li>
             </ul>
         </div>
-    </div>
-
-    <div>
-        <button id="klipp" onclick="cuttingsForanNothinBak()">Trykk for å klippe hunden</button>
-        <button id="klipp" onclick="reverser()">Reverser</button>
-        <br>
-        <div id="bildet" >
-            <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
-        </div>
-    </div>
-
-
-
-<script>
-     
-
-    function cuttingsForanNothinBak() {
-        document.getElementById('bildet').innerHTML = /*HTML*/ `
-        <img src="PXL_20250119_150226897.jpg" style="height: 500px;">
+        <button onclick="fargeValgPluss()">Endre fargetall +</button>
+        <div id="taillet"></div>
+        <button onclick="fargeValgMinus()">Endre fargetall -</button>
         `;
+        
+        backGround('30%', nyGreie);
     }
-    function reverser() {
-        document.getElementById('bildet').innerHTML = /*HTML*/ `
-        <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
-        `;
+            
+    function down() {
+        tekstTaill -= 1;
+        if(tekstTaill >= 0){
+            var tall = String(tekstTaill);
+            var tekst = "px";
+            var nyGreie = tall.concat("",tekst);
+            document.getElementById('output').innerHTML = tall + 'px';
+            backGround('30%', nyGreie);
+        }
+        else{
+            tekstTaill = 0
+        }
+    }
+
+    function fargeValgPluss() {
+        if(fargTaill <= 9){
+            fargTaill += 1
+            farge(fargTaill)
+        }
+        else if (fargTaill < 10){
+            fargTaill = 9
+        }
+    }
+
+    function fargeValgMinus() {
+        if(fargTaill < 2){
+            fargTaill = 2
+        }
+        else{
+            fargTaill -= 1
+            farge(fargTaill)
+        }
+    }
+
+    function farge(color) {
+        document.getElementById('taillet').innerHTML = fargTaill
+        if(color == 1){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = '#00FFFF'
+        }
+
+        else if(color == 2){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "blue"
+        }
+        
+        else if(color == 3){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "yellow"
+        }
+        
+        else if(color == 4){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "orange"
+        }
+        
+        else if(color == 5){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "#DFFF00"
+        }
+        
+        else if(color == 6){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "purple"
+        }
+        
+        else if(color == 7){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "#F3E5AB"
+        }
+        
+        else if(color == 8){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "#93C572"
+        }
+        
+        else if(color == 9){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "#FF5F1F"
+        }
+        
+        else if(color == 10){
+            let blokka = document.getElementById('blokka')
+            blokka.style.background = "green"
+        }
+
+    }
+
+    function farger() {
+
     }
 
 </script>
