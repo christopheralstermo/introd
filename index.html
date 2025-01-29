@@ -17,7 +17,7 @@
         h1 {
             color: red;
             width: 100px;
-            background-color: rgb(0, 255, 51);
+            background-color: rgb(75, 225, 105);
         }
 
 
@@ -26,15 +26,6 @@
             box-shadow: 10px 10px 10px;
         }
 
-        /* li {
-            background-color: aqua;
-            border: darkolivegreen;
-        }
-        
-        #blokka {
-            width: 100px;
-            background-color: aquamarine;
-        } */
     </style>
 </head>
 <body>
@@ -70,11 +61,31 @@
     </p>
     <button onclick="testToggle()">test</button>
 
+    <div style="border: double 5px; margin-top: 10px; width: 800px;">
+        <div id="testText"></div>
+        <div>
+            <button style="width: 250px; height: 40px;" onclick="farge1Up()">farge1 opp</button>
+            <button style="width: 250px; height: 40px;" onclick="farge2Up()">farge2 opp</button>
+            <button style="width: 250px; height: 40px;" onclick="farge3Up()">farge3 opp</button>
+        </div>
+        <br>
+        <div>
+            <button style="width: 250px; height: 40px;" onclick="farge1Down()">farge1 ned</button>
+            <button style="width: 250px; height: 40px;" onclick="farge2Down()">farge2 ned</button>
+            <button style="width: 250px; height: 40px;" onclick="farge3Down()">farge3 ned</button>
+        </div>
+    </div>
+
 <script>
     var tekstTaill = 25
     var fargTaill = 0
     let testBool = true
+    let firstTextColor1 = 20
+    let firstTextColor2 = 20
+    let firstTextColor3 = 20
     
+    textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+
     function testToggle() {
             testBool = !testBool;
             document.getElementById('toggled').innerHTML = testBool
@@ -131,7 +142,6 @@
         
         backGround('30%', nyGreie);
     }
-            
     function down() {
         tekstTaill -= 1;
         if(tekstTaill >= 0){
@@ -155,7 +165,6 @@
             fargTaill = 9
         }
     }
-
     function fargeValgMinus() {
         if(fargTaill < 2){
             fargTaill = 2
@@ -171,6 +180,7 @@
         if(color == 1){
             let blokka = document.getElementById('blokka')
             blokka.style.background = '#00FFFF'
+
         }
 
         else if(color == 2){
@@ -220,9 +230,76 @@
 
     }
 
-    function farger() {
+        function farge1Up() {
+            if(firstTextColor1 < 250){
+                firstTextColor1 += 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor1 = 250
+            }
+            
+            console.log("tekstcolor1: " + firstTextColor1)
+        }
+        function farge2Up() {
+            if(firstTextColor2 < 250){
+                firstTextColor2 += 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor2 = 250
+            }
+            console.log("tekstcolor2: " + firstTextColor2)
+        }
+        function farge3Up() {
+            if(firstTextColor3 < 250){
+                firstTextColor3 += 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor3 = 250
+            }
+            console.log("tekstcolor3: " + firstTextColor3)
+        }
 
-    }
+        function farge1Down() {
+            if(firstTextColor1 > 0){
+                firstTextColor1 -= 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor1 = 0
+            }
+            console.log("tekstcolor1: " + firstTextColor1)
+        }
+        function farge2Down() {
+            if(firstTextColor2 > 0){
+                firstTextColor2 -= 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor2 = 0
+            }          
+            console.log("tekstcolor2: " + firstTextColor2)
+        }
+        function farge3Down() {
+            if(firstTextColor3 > 0){
+                firstTextColor3 -= 20
+                textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+            }
+            else{
+                firstTextColor3 = 0
+            }            
+            console.log("tekstcolor3: " + firstTextColor3)
+        }
+        
+        function textEndringer(size, color1, color2, color3){
+            document.getElementById('testText').innerHTML = /*HTML*/ `
+            <span style="font-size: ${size}; color: rgb(${color1},${color2},${color3})">Her er en liten tekst</span>            
+            `;
+            
+        }
+
 
 </script>
 </body>
