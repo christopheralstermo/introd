@@ -26,7 +26,14 @@
             box-shadow: 10px 10px 10px;
         }
 
-    </style>
+        .scroll {
+            overflow-y: scroll;
+            height: 200px;
+            width: 200px;
+        }
+        </style>
+<!------------------------------------------Textendring---------------------------------------------->
+
 </head>
 <body>
     <h1 style="background-color: rgb(farger(), 59, 59);">Chris</h1>
@@ -34,7 +41,7 @@
         <button onclick="up()">Større skrift</button>
         <div id="output">0px</div>
         
-
+<!-------------------------------------------Klippe hund------------------------------------------------>
     
 <div id="blokka"></div>
 
@@ -47,6 +54,9 @@
                 <img src="PXL_20250118_192645800.jpg" style="height: 500px;">
             </div>
         </div>
+
+<!-------------------------------------------Et smil------------------------------------------------>
+
         <div id="bilde2">
             <button id="klipp" onclick="theSmile()">Trenger du et smil?</button>
             <br>
@@ -56,10 +66,15 @@
         </div>
     </div>
 
+
+<!-------------------------------------------Boolean test------------------------------------------------>
+
     <p id="toggled">
         true
     </p>
     <button onclick="testToggle()">test</button>
+
+<!-------------------------------------------Endre bakgrunnsfarge------------------------------------------->
 
     <div style="border: double 5px; margin-top: 10px; width: 800px;">
         <div id="testText"></div>
@@ -76,6 +91,19 @@
         </div>
     </div>
 
+<!-------------------------------------------Stoppeklokke------------------------------------------------>
+
+<div style="border: solid 2px; width: 180px; margin: 20px 0px 230px 0px;">
+    <div style="font-size: 30px; border: double 5px; background-color: aqua; width: 170px;">
+        <button onclick="startAndStop()">Start/Stopp</button>
+        <button onclick="printRounds()">Rundetid</button>
+        <div id="klokka">Sekunder: </div>
+    </div>
+        <div id="runde"></div>
+</div>
+
+
+
 <script>
     var tekstTaill = 25
     var fargTaill = 0
@@ -83,8 +111,48 @@
     let firstTextColor1 = 20
     let firstTextColor2 = 20
     let firstTextColor3 = 20
+    let timer = 0
+    let bryter = false
+    let count = 0
+    const rundeTidNummer = []
+    const rundeTid = []
     
+    start()
     textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
+    
+    function start() {
+        setInterval(stopWatch, 1000);
+    }
+    function startAndStop(){
+        bryter = !bryter;
+        console.log(bryter);
+    }
+    function stopWatch(){
+        if(bryter == true){
+            timer += 1;
+             document.getElementById('klokka').innerHTML = /*HTML*/ `
+             Sekunder: ${timer}
+             `;
+        }
+    }
+    function printRounds() {
+        setTimeout(round,1);
+    }
+    function theHTML() {
+            return /*HTML*/`
+                <div style="border: solid; margin-top: 5px; background-color: lightblue; width: 177px; font-size: 25px;">Runde nr ${rundeTidNummer[count-1]}<br><br>Tid: ${rundeTid[count-1]} sek</div>
+                `;
+    }
+    function round() {
+        count += 1;
+        rundeTidNummer.push(count);
+        rundeTid.push(timer);
+        document.getElementById('runde').innerHTML += theHTML();
+        console.log("rundetid satt i lista --> " + rundeTid)
+        if(count > 2){
+            document.getElementById('runde').classList.add('scroll')
+        }
+    }
 
     function testToggle() {
             testBool = !testBool;
