@@ -31,6 +31,53 @@
             height: 200px;
             width: 200px;
         }
+
+        @font-face {
+            font-family: digit;
+            src: url('Lcd.ttf');
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 10px;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+
+        .keys > div {
+            background-color: rgba(177, 217, 182, 0.8);
+            text-align: center;
+            padding: 10px;
+            font-size: 30px;
+            box-shadow: 3px 3px 1px;
+        }
+        
+        .keys > :hover {
+            background-color: rgb(199, 220, 235);
+            box-shadow: 3px 3px 5px;
+        }
+
+        .keys > div:active {
+            background-color: rgb(199, 220, 235);
+            box-shadow: 0px 0px 0px;
+        }
+        
+        #vindu {
+            display: block; 
+            margin-left: 10%; 
+            width: 80%; 
+            height: 50px; 
+            font-size: 40px; 
+            margin-bottom: 10px; 
+            margin-top: 5px; 
+            background-color: aqua; 
+            border: solid 1px; 
+            text-align: center;
+            font-family: digit;
+
+        }
+
         </style>
 <!------------------------------------------Textendring---------------------------------------------->
 
@@ -79,30 +126,56 @@
     <div style="border: double 5px; margin-top: 10px; width: 800px;">
         <div id="testText"></div>
         <div>
-            <button style="width: 250px; height: 40px;" onclick="farge1Up()">farge1 opp</button>
-            <button style="width: 250px; height: 40px;" onclick="farge2Up()">farge2 opp</button>
-            <button style="width: 250px; height: 40px;" onclick="farge3Up()">farge3 opp</button>
+            <button style="width: 250px; height: 40px;" onclick="farge1Up()">mer rød</button>
+            <button style="width: 250px; height: 40px;" onclick="farge2Up()">mer grønn</button>
+            <button style="width: 250px; height: 40px;" onclick="farge3Up()">mer blå</button>
         </div>
         <br>
         <div>
-            <button style="width: 250px; height: 40px;" onclick="farge1Down()">farge1 ned</button>
-            <button style="width: 250px; height: 40px;" onclick="farge2Down()">farge2 ned</button>
-            <button style="width: 250px; height: 40px;" onclick="farge3Down()">farge3 ned</button>
+            <button style="width: 250px; height: 40px;" onclick="farge1Down()">mindre rød</button>
+            <button style="width: 250px; height: 40px;" onclick="farge2Down()">mindre grønn</button>
+            <button style="width: 250px; height: 40px;" onclick="farge3Down()">mindre blå</button>
         </div>
     </div>
 
 <!-------------------------------------------Stoppeklokke------------------------------------------------>
-
-<div style="border: solid 2px; width: 180px; margin: 20px 0px 230px 0px;">
-    <div style="font-size: 30px; border: double 5px; background-color: aqua; width: 170px;">
-        <button onclick="startAndStop()">Start/Stopp</button>
-        <button onclick="printRounds()">Rundetid</button>
-        <div id="klokka">Sekunder: </div>
+<div style="display: flex;">
+    <div style="border: solid 2px; width: 180px; margin: 20px 0px 230px 0px;">
+        <div style="font-size: 30px; border: double 5px; background-color: aqua; width: 170px;">
+            <button onclick="startAndStop()">Start/Stopp</button>
+            <button onclick="printRounds()">Rundetid</button>
+            <div id="klokka">Sekunder: </div>
+        </div>
+            <div id="runde"></div>
     </div>
-        <div id="runde"></div>
+
+    <!------------------------------------------- Kalkulator ------------------------------------------------>
+
+
+    <div style="border: solid 0.8px; width: 300px; box-shadow: 3px 3px 1px; background-color: lightgray; margin-top: 20px; margin-left: 40px;">
+        <input id="vindu" readonly>
+
+        <div class="keys">
+          <div onclick="appendToDisplay(this)">1</div>
+          <div onclick="appendToDisplay(this)">2</div>
+          <div onclick="appendToDisplay(this)">3</div>  
+          <div onclick="appendToDisplay(this)">4</div>
+          <div onclick="appendToDisplay(this)">5</div>
+          <div onclick="appendToDisplay(this)">6</div>
+          <div onclick="appendToDisplay(this)">7</div>
+          <div onclick="appendToDisplay(this)">8</div>
+          <div onclick="appendToDisplay(this)">9</div>
+          <div onclick="appendToDisplay(this)">0</div>
+          <div style="font-weight: 100;" onclick="appendToDisplay(this)">.</div>
+          <div style="font-weight: bolder;" onclick="clr()">C</div>
+          <div style="font-weight: 100;" onclick="appendToDisplay(this)">+</div>
+          <div style="font-weight: 100;" onclick="appendToDisplay(this)">-</div>
+          <div style="font-weight: bolder;" onclick="calc()">=</div>
+          <div style="font-weight: 100;" onclick="appendToDisplay(this)">*</div>
+          <div style="font-weight: 100;" onclick="appendToDisplay(this)">/</div>
+        </div>
+    </div>
 </div>
-
-
 
 <script>
     var tekstTaill = 25
@@ -116,49 +189,14 @@
     let count = 0
     const rundeTidNummer = []
     const rundeTid = []
+    const display = document.getElementById('vindu');
     
     start()
     textEndringer('100px', firstTextColor1, firstTextColor2, firstTextColor3)
     
-    function start() {
-        setInterval(stopWatch, 1000);
-    }
-    function startAndStop(){
-        bryter = !bryter;
-        console.log(bryter);
-    }
-    function stopWatch(){
-        if(bryter == true){
-            timer += 1;
-             document.getElementById('klokka').innerHTML = /*HTML*/ `
-             Sekunder: ${timer}
-             `;
-        }
-    }
-    function printRounds() {
-        setTimeout(round,1);
-    }
-    function theHTML() {
-            return /*HTML*/`
-                <div style="border: solid; margin-top: 5px; background-color: lightblue; width: 177px; font-size: 25px;">Runde nr ${rundeTidNummer[count-1]}<br><br>Tid: ${rundeTid[count-1]} sek</div>
-                `;
-    }
-    function round() {
-        count += 1;
-        rundeTidNummer.push(count);
-        rundeTid.push(timer);
-        document.getElementById('runde').innerHTML += theHTML();
-        console.log("rundetid satt i lista --> " + rundeTid)
-        if(count > 2){
-            document.getElementById('runde').classList.add('scroll')
-        }
-    }
 
-    function testToggle() {
-            testBool = !testBool;
-            document.getElementById('toggled').innerHTML = testBool
-        }
-    
+//----------------------------------- GIF ------------------------------------------------------        
+
      function theSmile() {
 
              document.getElementById('giffen').innerHTML = /*HTML*/ `
@@ -166,6 +204,9 @@
              `;
 
      }
+
+
+//----------------------------------- HUNDEKLIPP ------------------------------------------------------
 
     function cuttingsForanAndNothinBak() {
         document.getElementById('bildet').innerHTML = /*HTML*/ `
@@ -179,6 +220,8 @@
         `;
     }
     
+//----------------------------------- FARGEVALG OG BAKGRUNN PÅ TEKST OVER BILDER ------------------------------------------------------
+
     function backGround(bredde, size) {
         let blokka = document.getElementById('blokka')
         blokka.style.width = bredde
@@ -298,6 +341,16 @@
 
     }
 
+//----------------------------------- BOOLEAN TESTKNAPP ------------------------------------------------------
+
+function testToggle() {
+            testBool = !testBool;
+            document.getElementById('toggled').innerHTML = testBool
+        }
+
+
+//----------------------------------- FARGEVALG PÅ EN LITEN TEKST ------------------------------------------------------
+
         function farge1Up() {
             if(firstTextColor1 < 250){
                 firstTextColor1 += 20
@@ -367,6 +420,76 @@
             `;
             
         }
+
+    //----------------------------------- STOPPEKLOKKE ------------------------------------------------------
+    
+    function start() {
+        setInterval(stopWatch, 1000);
+    }
+    function startAndStop(){
+        bryter = !bryter;
+        console.log(bryter);
+    }
+    function stopWatch(){
+        if(bryter == true){
+            timer += 1;
+             document.getElementById('klokka').innerHTML = /*HTML*/ `
+             Sekunder: ${timer}
+             `;
+        }
+    }
+    function printRounds() {
+        setTimeout(round,1);
+    }
+    function theHTML() {
+            return /*HTML*/`
+                <div style="border: solid; margin-top: 5px; background-color: lightblue; width: 177px; font-size: 25px;">Runde nr ${rundeTidNummer[count-1]}<br><br>Tid: ${rundeTid[count-1]} sek</div>
+                `;
+    }
+    function round() {
+        count += 1;
+        rundeTidNummer.push(count);
+        rundeTid.push(timer);
+        document.getElementById('runde').innerHTML += theHTML();
+        console.log("rundetid satt i lista --> " + rundeTid)
+        if(count > 2){
+            document.getElementById('runde').classList.add('scroll')
+        }
+    }
+
+
+
+    //----------------------------------- KALKULATOR ------------------------------------------------------
+
+    
+
+    function appendToDisplay(symbolOnButton){
+       talletPåknappen = symbolOnButton.innerHTML;
+
+       if(talletPåknappen >= 0 && talletPåknappen <= 9){
+           display.value += Number(talletPåknappen);
+       }
+       else{
+           display.value += talletPåknappen;
+       }
+    }
+
+    function clr(){
+       display.value = "";
+    }
+
+    function calc(){
+       try{
+           display.value = eval(display.value);
+           console.log(display.value);
+           }
+
+       catch(Error){
+               display.value = "Ei lita error";
+           }
+
+       }
+
 
 
 </script>
