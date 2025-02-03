@@ -159,7 +159,7 @@
 
 /*---------------------------------thecrock-----------------------------*/
 
-        #display2 {
+        #display {
             border: solid;
             height: 25px;
             width: 50px; 
@@ -292,7 +292,7 @@
 
  <!------------------------------------------- theCrock ------------------------------------------------>
 
- <div style="border: dotted 5px; width: 200px; padding-left: 70px; margin-top: 20px;">
+ <div style="border: dotted 5px; width: 200px; padding-left: 70px;">
     <div style="display: flex; border: solid; width: 120px;">
         <div style="width: 88px; height: 50px; font-size: 30px; padding-top: 5px;">Poeng:</div>
         <div id="poeng" style="font-size: 30px; font-size: 30px; padding-top: 8px;"></div>
@@ -303,14 +303,13 @@
     <div style="display: flex;">
         <div id="venstre" style="width: 30px; height: 25px; border: solid; text-align: center;"></div>
 
-        <!-- <input id="display" readonly><br><br> -->
-        <div id="display2"></div>
+        <div id="display"></div>
     
         <div id="høyre" style="width: 30px; height: 25px; border: solid; text-align: center;"></div>
     </div>
 
     <button onclick="textBoxen()">Submit</button>
-    <button onclick="randomNumber()">Reset</button><br><br>
+    <button id="setButton" onclick="randomNumber()">Set</button><br><br>
     <button id="venstre" onclick="valg(this)" style="margin-left: 30px;">&gt;</button>
     <button id="midten" onclick="valg(this)">&#61;</button>
     <button id="høyre" onclick="valg(this)">&lt;</button>
@@ -666,7 +665,8 @@ function testToggle() {
 
 
         const poeng = document.getElementById('poeng');
-        let displayCrock = document.getElementById('display2')
+        let displayCrock = document.getElementById('display')
+        let setButton = document.getElementById('setButton')
         let venstreBox = document.getElementById('venstre');
         let midtBox = document.getElementById('midten');
         let høyreBox = document.getElementById('høyre');
@@ -675,51 +675,34 @@ function testToggle() {
 
         function valg(element) {
             if(element.id == "venstre"){
-                document.getElementById('display2').innerHTML = "&gt;"
+                document.getElementById('display').innerHTML = "&gt;"
             }
             else if(element.id == "midten"){
-                document.getElementById('display2').innerHTML = "="
-                console.log(display.innerHTML)
+                document.getElementById('display').innerHTML = "="
+                console.log(displayCrock.innerHTML)
             }
             else{
-                document.getElementById('display2').innerHTML = "&lt;"
+                document.getElementById('display').innerHTML = "&lt;"
             }
         }
 
         function randomNumber(){
             displayCrock.innerHTML = ""
-            let tall2 = Math.floor(Math.random()*10 + 1);
             let tall1 = Math.floor(Math.random()*10 + 1);
+            let tall2 = Math.floor(Math.random()*10 + 1);
             venstreBox.innerHTML = tall1;
             høyreBox.innerHTML = tall2;
 
         }
         
         function textBoxen(){
-            let venstre = venstreBox.innerHTML
-            let høyre = høyreBox.innerHTML
+            setButton.innerHTML = "Reset"
+            let venstre = Number(venstreBox.innerHTML)
+            let høyre = Number(høyreBox.innerHTML)
 
             
             
-            if(venstre > høyre && displayCrock.innerHTML == "&gt;"){
-                poeng.innerHTML = 1
-                poengListe.push(Number(poeng.innerHTML))
-                let sum = 0
-                for (let i = 0; i < poengListe.length; i++) {sum += poengListe[i]}
-
-                poeng.innerHTML = sum
-            }
-
-            else if(venstre < høyre && displayCrock.innerHTML == "&lt;"){
-                poeng.innerHTML = 1
-                poengListe.push(Number(poeng.innerHTML))
-                let sum = 0
-                for (let i = 0; i < poengListe.length; i++) {sum += poengListe[i]}
-
-                poeng.innerHTML = sum
-            }
-
-            else if( venstre == høyre && displayCrock.innerHTML == "="){
+            if(venstre > høyre && displayCrock.innerHTML === "&gt;" || venstre < høyre && displayCrock.innerHTML === "&lt;" || venstre == høyre && displayCrock.innerHTML === "="){
                 poeng.innerHTML = 1
                 poengListe.push(Number(poeng.innerHTML))
                 let sum = 0
