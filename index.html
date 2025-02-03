@@ -84,7 +84,78 @@
 
         }
 
+/*------------------------ lyspære ---------------------------------*/
 
+#glassKula {
+            border: solid 0.5px;
+            width: 200px;
+            height: 300px;
+            border-radius: 30%;
+        }
+        
+        #metallSokkelen {
+            border: solid 1px;
+            width: 100px;
+            height: 10px;
+            margin-left: 50px;
+            background-color: gray;
+        }
+
+        .gulSkjæretPåHøyreSide {
+            background-color: yellow;
+            border-radius: 50%;
+            box-shadow: 50px 0px 100px yellow;
+        }
+        .gulSkjæretPåVenstreSide {
+            background-color: yellow;
+            border-radius: 50%;
+            box-shadow: -50px 0px 100px yellow;
+        }
+        .colorOff {
+            background-color: lightgray;
+        }
+
+        .lysBryter1 {
+            font-size: 40px; 
+            background-color: gray;
+        }
+        .lysBryter2 {
+            margin-left: 67px; 
+            font-size: 40px; 
+            background-color: gray;
+        }
+        .glødOff {
+            border: solid; 
+            height: 50px; 
+            width: 4px; 
+            margin-left: 100px; 
+            padding-top: 100px; 
+            margin-top: 0px;
+            border-radius: 30%;
+        }
+        
+        .glød {
+            border: solid 3px;
+            border-radius: 30%;
+            color: orange;
+            width: 2px;
+        }
+
+        .shine{
+            width: 50px; 
+            height: 130px; 
+            margin-left: 20px; 
+            margin-top: 20px; 
+            border-radius: 45%; 
+            background-color: white;
+        }
+        .shine2{
+            width: 50px; 
+            height: 130px; 
+            margin-left: 20px; 
+            margin-top: 20px; 
+            border-radius: 45%;
+        }
 
 
 
@@ -93,7 +164,7 @@
 
 </head>
 <body>
-    <h1 style="background-color: rgb(farger(), 59, 59);">Chris</h1>
+    <h1 style="background-color: rgb(farger(), 59, 59); width: 160px;">Chris' kaos</h1>
 
         <button onclick="up()">Større skrift</button>
         <div id="output">0px</div>
@@ -186,6 +257,29 @@
         </div>
     </div>
 </div>
+ <!------------------------------------------- Lyspære ------------------------------------------------>
+
+ <div style="display: flex; padding-left: 200px; margin-top: 100px; background-color: rgb(2, 2, 39); width: 400px; height: 500px; padding-top: 100px;">
+    <div><div id="glassKula2">
+            <div id="glassKula">
+                <div id="shine" class="shine"></div>
+                <div id="glødeTråd"></div>
+            </div>
+        </div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+        <div id="metallSokkelen"></div>
+    </div>
+</div>
+
+<div style="border: solid 2px; width: 134px; height: 52px ;margin-top: 5px; background-color: lightgray; box-shadow: 2px 2px 0px;">
+    <button onclick="lysBryter()" class="lysBryter1" id="lysBryter">Off</button>
+</div>
+
 
 <script>
     var tekstTaill = 25
@@ -500,6 +594,36 @@ function testToggle() {
 
        }
 
+//----------------------------------- LYSPÆRE ------------------------------------------------------
+
+        let switchen = true
+        lysBryter()
+
+
+        function lysBryter() {
+            switchen = !switchen
+            if(switchen == true){
+                document.getElementById('glassKula').classList.add('gulSkjæretPåHøyreSide')
+                document.getElementById('glassKula').classList.remove('colorOff')
+                document.getElementById('glassKula2').classList.add('gulSkjæretPåVenstreSide')
+                document.getElementById('shine').classList.add('shine2')
+                document.getElementById('shine').classList.remove('shine')
+                document.getElementById('lysBryter').classList.add('lysBryter2')
+                document.getElementById('lysBryter').innerHTML = "On"
+                document.getElementById('glødeTråd').classList.add('glød')
+            }
+            else{
+                document.getElementById('shine').classList.add('shine')
+                document.getElementById('shine').classList.remove('shine2')
+                document.getElementById('glassKula').classList.add('colorOff')
+                document.getElementById('glassKula').classList.remove('gulSkjæretPåHøyreSide')
+                document.getElementById('glassKula2').classList.remove('gulSkjæretPåVenstreSide')
+                document.getElementById('glødeTråd').classList.add('glødOff')
+                document.getElementById('glødeTråd').classList.remove('glød')
+                document.getElementById('lysBryter').innerHTML = "Off"
+                document.getElementById('lysBryter').classList.remove('lysBryter2')
+            }
+        }
 
 
 </script>
